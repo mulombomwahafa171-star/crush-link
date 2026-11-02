@@ -1,77 +1,167 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>A Question For You ❤️</title>
-    <style>
-        body {
-            background: #ffe6f0;
-            text-align: center;
-            font-family: Arial;
-            padding-top: 100px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Question ❤️</title>
 
-        h1 {
-            color: #ff3385;
-        }
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #ffe0ec, #ffc1d9);
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        overflow: hidden;
+    }
 
-        button {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 20px;
-            font-size: 18px;
-            cursor: pointer;
-        }
+    .container {
+        background: white;
+        padding: 35px 20px;
+        width: 85%;
+        max-width: 420px;
+        border-radius: 25px;
+        box-shadow: 0 10px 30px #d8799c55;
+    }
 
-        #yes {
-            background: #ff3385;
-            color: white;
-        }
+    h1 {
+        color: #ff3385;
+        font-size: 27px;
+    }
 
-        #no {
-            background: gray;
-            color: white;
-            position: absolute;
-        }
+    p {
+        color: #777;
+    }
 
-        #message {
-            color: #ff3385;
-            font-size: 25px;
-        }
-    </style>
+    button {
+        padding: 14px 25px;
+        border: none;
+        border-radius: 25px;
+        font-size: 17px;
+        margin: 10px;
+        cursor: pointer;
+    }
+
+    #yes {
+        background: #ff3385;
+        color: white;
+    }
+
+    #no {
+        background: #777;
+        color: white;
+    }
+
+    #progress {
+        color: #ff3385;
+        font-size: 13px;
+        margin-top: 20px;
+    }
+
+    .heart {
+        font-size: 45px;
+    }
+</style>
 </head>
+
 <body>
 
-    <h1>Do you like me? ❤️🥺</h1>
-    <p>Be honest with me! 😊</p>
+<div class="container" id="container">
+    <div class="heart">❤️</div>
 
-    <button id="yes" onclick="sayYes()">YES ❤️</button>
-    <button id="no" onmouseover="runAway()"
-    onclick="runAway()">NO 💔</button>
+    <h1 id="question"></h1>
 
-    <h2 id="message"></h2>
+    <p id="subtitle">Be honest with me! 🥺</p>
 
-    <script>
-        function sayYes() {
-            document.body.innerHTML = `
-                <h1 style="margin-top:150px">
-                Awwww! 🥰❤️
-                </h1>
-                <h2>Thank you for making my day! 💕</h2>
-            `;
-        }
+    <button id="yes" onclick="nextQuestion()">
+        YES ❤️
+    </button>
 
-        function runAway() {
-            let no = document.getElementById("no");
+    <button id="no">
+        NO 💔
+    </button>
 
-            no.style.left =
-                Math.random() * (window.innerWidth - 100) + "px";
+    <div id="progress"></div>
+</div>
 
-            no.style.top =
-                Math.random() * (window.innerHeight - 50) + "px";
-        }
-    </script>
+<script>
+
+const questions = [
+    "Do you like me? ❤️",
+    "Do you think I'm handsome? 😎",
+    "Would you like to chat with me every day? 💬",
+    "Do you miss me when I'm not around? 🥺",
+    "Would you go on a date with me? 🌹",
+    "Can I be someone special in your life? ❤️"
+];
+
+let currentQuestion = 0;
+
+const question = document.getElementById("question");
+const subtitle = document.getElementById("subtitle");
+const progress = document.getElementById("progress");
+const no = document.getElementById("no");
+
+function showQuestion() {
+    question.innerText = questions[currentQuestion];
+    progress.innerText =
+        "Question " + (currentQuestion + 1) +
+        " of " + questions.length;
+}
+
+function nextQuestion() {
+    currentQuestion++;
+
+    if (currentQuestion < questions.length) {
+        showQuestion();
+    } else {
+        document.getElementById("container").innerHTML = `
+            <div class="heart">🥰💖</div>
+            <h1>YOU JUST MADE MY DAY!</h1>
+            <h2 style="color:#ff3385">
+                Thank you so much! ❤️
+            </h2>
+            <p>
+                You have no idea how happy you made me!
+            </p>
+            <h1>😘🌹💕</h1>
+            <p>With love ❤️</p>
+        `;
+    }
+}
+
+function runAway() {
+    no.style.position = "fixed";
+
+    const maxX = window.innerWidth - no.offsetWidth - 10;
+    const maxY = window.innerHeight - no.offsetHeight - 10;
+
+    no.style.left = Math.max(5, Math.random() * maxX) + "px";
+    no.style.top = Math.max(5, Math.random() * maxY) + "px";
+}
+
+no.addEventListener("pointerenter", function(e) {
+    if (e.pointerType === "mouse") runAway();
+});
+
+no.addEventListener("touchstart", function(e) {
+    e.preventDefault();
+    runAway();
+}, {passive: false});
+
+no.addEventListener("click", function(e) {
+    e.preventDefault();
+    runAway();
+});
+
+showQuestion();
+
+</script>
 
 </body>
-  </html>
-  
+    </html>
+    

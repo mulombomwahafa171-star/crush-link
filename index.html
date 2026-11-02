@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>A Question For You ❤️</title>
+    <style>
+        body {
+            background: #ffe6f0;
+            text-align: center;
+            font-family: Arial;
+            padding-top: 100px;
+        }
+
+        h1 {
+            color: #ff3385;
+        }
+
+        button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        #yes {
+            background: #ff3385;
+            color: white;
+        }
+
+        #no {
+            background: gray;
+            color: white;
+            position: absolute;
+        }
+
+        #message {
+            color: #ff3385;
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Do you like me? ❤️🥺</h1>
+    <p>Be honest with me! 😊</p>
+
+    <button id="yes" onclick="sayYes()">YES ❤️</button>
+    <button id="no" onmouseover="runAway()"
+    onclick="runAway()">NO 💔</button>
+
+    <h2 id="message"></h2>
+
+    <script>
+        function sayYes() {
+            document.body.innerHTML = `
+                <h1 style="margin-top:150px">
+                Awwww! 🥰❤️
+                </h1>
+                <h2>Thank you for making my day! 💕</h2>
+            `;
+        }
+
+        function runAway() {
+            let no = document.getElementById("no");
+
+            no.style.left =
+                Math.random() * (window.innerWidth - 100) + "px";
+
+            no.style.top =
+                Math.random() * (window.innerHeight - 50) + "px";
+        }
+    </script>
+
+</body>
+  </html>
+  
